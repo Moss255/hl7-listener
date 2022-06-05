@@ -10,6 +10,8 @@ You will need to have golang 1.18 installed locally. This can be done either via
 
 This microservice is deployed as a container on a server that is expecting incoming traffic.
 
+This service will sit behind an API gateway in order to handle rate limiting and restricting to the specific IP address. Cross cutting concerns etc etc.
+
 ## Expected files
 
 The service requires some environmental variables to be set in order to initialise properly.
