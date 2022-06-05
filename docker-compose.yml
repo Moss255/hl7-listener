@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  listener:
+    image: "sprdocker01-v.swlstg.nhs.uk/hl7-listener"
+    container_name: "hl7-listener"
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "3009:5000"
+    extra_hosts:
+      - "sprdw01-v:10.151.32.124"
+      - "sprmariadb01-v:10.151.32.80"
+    restart: "always"
