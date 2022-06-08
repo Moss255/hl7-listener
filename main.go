@@ -10,7 +10,7 @@ import (
 	"github.com/lenaten/hl7"
 )
 
-func forwardMessage(msg *hl7.Message, url string) error {
+func forwardMessageHTTP(msg *hl7.Message, url string) error {
 
 	client := http.Client{}
 
@@ -65,11 +65,13 @@ func HL7Handler(res http.ResponseWriter, req *http.Request) {
 
 	url := os.Getenv("FORWARDING_ADDRESS")
 
-	msgErr := forwardMessage(msg, url)
+	//msgErr := forwardMessageREDIS(msg, url)
 
-	if msgErr != nil {
-		fmt.Print(msgErr)
-	}
+	ForwardToRabbitQueue(msg, url)
+
+	//if msgErr != nil {
+	//	fmt.Print(msgErr)
+	//}
 
 	ack, err := sendAcknowledgement(msg)
 
